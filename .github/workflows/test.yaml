@@ -1,0 +1,24 @@
+name: Run tests
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Linux OS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v3
+
+      - name: Set up JDK Temurin
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Run tests
+        run: mvn test
