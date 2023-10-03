@@ -1,4 +1,4 @@
-# Demo Application to try out GraalVM AOT Image
+# Demo Application to try out GraalVM AOT Image Java 17
 
 ## App Description
 This is a demo app to test out graalvm ahead of time compilation. It consists of a crud functionalities

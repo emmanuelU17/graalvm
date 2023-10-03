@@ -13,6 +13,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -83,13 +84,21 @@ class CarControllerTest extends AbstractIntegrationTest {
                 }
         );
 
+        var payload = new MockMultipartFile(
+                "dto",
+                null,
+                "application/json",
+                this.MAPPER.writeValueAsString(dto).getBytes()
+        );
+
         MockMultipartFile[] files = getFiles();
 
         this.MOCKMVC
                 .perform(multipart(url + "/image")
                         .file(files[0])
                         .file(files[1])
-                        .content(this.MAPPER.writeValueAsString(dto))
+                        .file(payload)
+                        .contentType(MULTIPART_FORM_DATA)
                 )
                 .andDo(print())
                 .andExpect(status().isCreated());

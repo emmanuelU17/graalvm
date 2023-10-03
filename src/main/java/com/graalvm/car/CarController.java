@@ -19,6 +19,7 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 @RequestMapping(path = "api/v1/car")
 @RequiredArgsConstructor
 public class CarController {
+
     private static final Logger log = LoggerFactory.getLogger(CarController.class);
 
     private final CarService carService;
@@ -38,15 +39,17 @@ public class CarController {
     }
 
     @ResponseStatus(CREATED)
-    @PostMapping(path = "/image", consumes = { MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(path = "/image", consumes = MULTIPART_FORM_DATA_VALUE)
     void createWithImage(
-            @Valid @ModelAttribute CarDTO dto,
-            @RequestPart (value = "files") MultipartFile[] files
+            @Valid @RequestPart CarDTO dto,
+            @RequestParam(value = "files") MultipartFile[] files
     ) {
         // To test REST semantics
+        assert dto.brand() != null;
         assert dto.nestedDTOS().length > 0;
         assert files.length > 0;
         log.info("Created a car with images :)");
+        log.info("DTO {}", dto);
     }
 
 }
