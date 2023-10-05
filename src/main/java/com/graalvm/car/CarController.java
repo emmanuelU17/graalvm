@@ -3,8 +3,6 @@ package com.graalvm.car;
 import com.graalvm.car.dto.CarDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,13 +18,11 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 @RequiredArgsConstructor
 public class CarController {
 
-    private static final Logger log = LoggerFactory.getLogger(CarController.class);
-
     private final CarService carService;
 
     @ResponseStatus(OK)
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    List<Car> all() {
+    List<CarProjection> all() {
         return this.carService.all();
     }
 
@@ -48,8 +44,6 @@ public class CarController {
         assert dto.brand() != null;
         assert dto.nestedDTOS().length > 0;
         assert files.length > 0;
-        log.info("Created a car with images :)");
-        log.info("DTO {}", dto);
     }
 
 }

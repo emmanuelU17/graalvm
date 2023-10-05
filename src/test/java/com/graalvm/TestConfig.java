@@ -1,6 +1,8 @@
 package com.graalvm;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.testcontainers.containers.MySQLContainer;
 
 @TestConfiguration
@@ -11,13 +13,18 @@ public abstract class TestConfig {
 
     static {
         // Build MySQL container
-        container = new MySQLContainer<>("mysql:latest")
+        container = new MySQLContainer<>("mysql:8.0")
                 .withDatabaseName("custom_db")
                 .withUsername("password")
                 .withPassword("password");
 
         // Start container
         container.start();
+    }
+
+    @Bean
+    ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 
 }

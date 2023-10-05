@@ -1,4 +1,4 @@
-# Demo Application to try out GraalVM AOT Image Java 17
+# Demo Application to try out GraalVM AOT (Java 17)
 
 ## App Description
 This is a demo app to test out graalvm ahead of time compilation. It consists of a crud functionalities
@@ -17,10 +17,10 @@ Docker installed
 * Spring jpa
 * MySQL connector
 * Lombok
-* Flyway Migration
+* Flyway migration
 * spring-boot-starter-oauth2-resource-server
 * Spring starter test
-* Rest containers
+* Test containers
 
 ## Important info
 [native-image-libraries-and-frameworks](https://www.graalvm.org/native-image/libraries-and-frameworks/)

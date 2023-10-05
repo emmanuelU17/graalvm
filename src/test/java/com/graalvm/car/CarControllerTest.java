@@ -50,6 +50,7 @@ class CarControllerTest extends AbstractIntegrationTest {
         this.MOCKMVC
                 .perform(get(url).contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andDo(print())
                 .andExpect(jsonPath("$").isArray());
     }
 
