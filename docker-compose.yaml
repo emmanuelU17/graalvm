@@ -1,18 +1,18 @@
 version: '3.9'
 services:
 
-  api:
-    container_name: api
-    image: "graalvm:0.0.1-SNAPSHOT"
-    ports:
-      - "8080:8080"
-    depends_on:
-      mysql:
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/custom_db
-      SPRING_DATASOURCE_USERNAME: password
-      SPRING_DATASOURCE_PASSWORD: password
+#  api:
+#    container_name: api
+#    image: "graalvm:0.0.1-SNAPSHOT"
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/custom_db
+#      SPRING_DATASOURCE_USERNAME: password
+#      SPRING_DATASOURCE_PASSWORD: password
 
   mysql:
     image: "mysql:8.0"

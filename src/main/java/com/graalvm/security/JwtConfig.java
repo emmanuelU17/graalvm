@@ -12,30 +12,13 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 
-import java.security.KeyPair;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.UUID;
-
 @Configuration
 public class JwtConfig {
 
-    private RSAKey rsaKey;
-
-    /** Using RSA KeyPair bean from KeyUtilGenerator generate RSAKey */
-    public static RSAKey generateRsa() {
-        KeyPair keyPair = KeyUtilGenerator.generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        return new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-    }
+    private static final RSAKey rsaKey = RSAConfig.GENERATERSA();;
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
-        rsaKey = generateRsa();
         JWKSet jwkSet = new JWKSet(rsaKey);
         return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
     }

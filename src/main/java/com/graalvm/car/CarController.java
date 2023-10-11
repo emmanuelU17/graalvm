@@ -38,7 +38,7 @@ public class CarController {
     @PostMapping(path = "/image", consumes = MULTIPART_FORM_DATA_VALUE)
     void createWithImage(
             @Valid @RequestPart CarDTO dto,
-            @RequestParam(value = "files") MultipartFile[] files
+            @RequestParam MultipartFile[] files
     ) {
         // To test REST semantics
         assert dto.brand() != null;
